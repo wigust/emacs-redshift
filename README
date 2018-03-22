@@ -1,0 +1,69 @@
+-*- mode: org -*-
+
+* About
+
+  =Emacs-Redshift= (aka =redshift.el=) provides an Emacs interface to
+  [[https://github.com/jonls/redshift][Redshift]] for changing display
+  color temperature.
+
+* Installation
+
+  Emacs-Redshift can be used from a Git checkout and can be installed
+  using Guix.
+
+** Git checkout
+
+   Clone a Git repository:
+
+   #+BEGIN_SRC sh
+     git clone https://github.com/wigust/emacs-redshift
+   #+END_SRC
+
+   Add it to Emacs =load-path= in your init file and load:
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path (expand-file-name "~/emacs-redshift"))
+     (require 'redshift)
+   #+END_SRC
+
+** Guix
+
+   Clone a Git repository:
+
+   #+BEGIN_SRC sh
+     git clone https://github.com/wigust/emacs-redshift
+     cd emacs-redshift
+   #+END_SRC
+
+   Install a Guix package with:
+
+   #+BEGIN_SRC sh
+     guix package -f guix.scm
+   #+END_SRC
+
+* Usage
+
+  Call =M-x redshift-set-temp= to set a display temperature.
+
+  Call =M-x redshift-increase-temp= to increase a display temperature.
+
+  Call =M-x redshift-decrease-temp= to decrease a display temperature.
+
+  To change increment for =redshift-increase-temp= and
+  =redshift-decrease-temp= set =redshift-temp-increment= to a number.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq redshift-temp-increment 100)
+  #+END_SRC
+
+* Keys
+
+  You could use [[https://github.com/abo-abo/hydra][Hydra]] to get an
+  interactive interface:
+
+  #+BEGIN_SRC emacs-lisp
+    (defhydra hydra-redshift () "redshift"
+        ("g" redshift-set-temp "set")
+        ("n" redshift-decrease-temp "decrease")
+        ("p" redshift-increase-temp "increase"))
+  #+END_SRC
